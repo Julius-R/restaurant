@@ -1,5 +1,6 @@
 class Fridge:
-    def __init__(self, owner):
+    def __init__(self, owner, nickname):
+        self.nickname = nickname
         self.owner = owner
         self.__authorized_users = [owner]
         self.__contents = []
@@ -17,10 +18,11 @@ class Fridge:
         print(item_to_delete)
         return item_to_delete
 
-    def add_to_fridge(self, item):
+    def add_to_fridge(self):
         if len(self.__contents) == 5:
             print("Your fridge is full!")
         else:
+            item = input("What would you like to add : ")
             self.__contents.append(item)
 
     def remove_from_fridge(self):

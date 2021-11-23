@@ -44,6 +44,6 @@ class Fridge:
         if self.check_if_empty():
             print("This fridge is empty!")
         else:
-            print(f"There are {str(len(self.__contents))} item(s) in the fridge. Here are the contents: \n")
+            print(f"{self.nickname} contains {len(self.__contents)}/5 items.")
             print(self.__contents)
 

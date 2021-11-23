@@ -2,19 +2,24 @@ from Fridge import Fridge as fr
 
 
 class Restaurant:
-    def __init__(self, owner):
+    def __init__(self, owner, password):
+        self.__password = password
         self.owner = owner
         self.__owned_fridges = []
 
-    def edit_fridge(self):
+    def user_choice(self):
         print(f"Select a fridge to edit or hit [c] to cancel:")
-        """create list comprehension to show fridge nickname and index"""
-        choice = input()
-        if choice == 'c':
+        fridges = [f"{fridge.nickname}[{self.__owned_fridges.index(fridge)}]" for fridge in self.__owned_fridges]
+        user_selection = input(fridges)
+        return user_selection
+
+    def edit_fridge(self):
+        choice = self.user_choice()
+        if choice.lower() == 'c':
             return
         else:
             selected_fridge = self.__owned_fridges[int(choice)]
-            print("What would you like to do?: \n Add Item[0] Remove Item[1] View Contents[2] Cancel[3]")
+            print("What would you like to do:\n Add Item[0] Remove Item[1] View Contents[2] Remove Fridge[3] Cancel[4]")
             action = int(input())
             if action == 0:
                 selected_fridge.add_to_fridge()
@@ -22,19 +27,41 @@ class Restaurant:
                 selected_fridge.remove_from_fridge()
             elif action == 2:
                 selected_fridge.check_fridge_contents()
+            elif action == 3:
+                self.__owned_fridges.remove(selected_fridge)
             else:
                 return
 
     def add_fridge(self):
-        self.__owned_fridges.append(fr(self.owner))
+        nickname = input("What would you like to name the fridge: ")
+        self.__owned_fridges.append(fr(self.owner, nickname))
+        print("Fridge added!")
 
     def remove_fridge(self):
-        pass
+        choice = self.user_choice()
+        if choice == 'c':
+            return
+        else:
+            self.__owned_fridges.remove(choice)
+            print("Fridge removed!")
 
     def show_all_fridges(self):
         for fridge in self.__owned_fridges:
-            print(f"Fridge[{self.__owned_fridges.index(fridge)}] contents:")
             fridge.check_fridge_contents()
 
+    # Will utilize this code for when complete application has been finished
+    def validate_password(self, pw):
+        if pw == self.__password:
+            return True
+        else:
+            return False
 
 
+# Testing code
+test = Restaurant("Jac", "350b534")
+test.add_fridge()
+test.add_fridge()
+test.show_all_fridges()
+print("------")
+test.edit_fridge()
+test.show_all_fridges()

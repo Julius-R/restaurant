@@ -28,7 +28,7 @@ class Restaurant:
             elif action == 2:
                 selected_fridge.check_fridge_contents()
             elif action == 3:
-                self.__owned_fridges.remove(selected_fridge)
+                self.remove_fridge(selected_fridge)
             else:
                 return
 
@@ -37,13 +37,18 @@ class Restaurant:
         self.__owned_fridges.append(fr(self.owner, nickname))
         print("Fridge added!")
 
-    def remove_fridge(self):
-        choice = self.user_choice()
-        if choice == 'c':
-            return
-        else:
+    def remove_fridge(self, choice):
+        if choice.check_if_empty():
             self.__owned_fridges.remove(choice)
             print("Fridge removed!")
+        else:
+            print("Fridge not empty!")
+            option = input("Would you like to discard all items to remove fridge? (y/n)")
+            if option.lower() == 'n':
+                self.edit_fridge()
+            else:
+                self.__owned_fridges.remove(choice)
+                print("Items discarded and Fridge removed!")
 
     def show_all_fridges(self):
         for fridge in self.__owned_fridges:
@@ -58,10 +63,10 @@ class Restaurant:
 
 
 # Testing code
-test = Restaurant("Jac", "350b534")
-test.add_fridge()
-test.add_fridge()
-test.show_all_fridges()
-print("------")
-test.edit_fridge()
-test.show_all_fridges()
+# test = Restaurant("Jac", "350b534")
+# test.add_fridge()
+# test.add_fridge()
+# test.show_all_fridges()
+# print("------")
+# test.edit_fridge()
+# test.show_all_fridges()

@@ -47,3 +47,5 @@ class Fridge:
             print(f"{self.nickname} contains {len(self.__contents)}/5 items.")
             print(self.__contents)
 
+
+

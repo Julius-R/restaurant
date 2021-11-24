@@ -62,11 +62,3 @@ class Restaurant:
             return False
 
 
-# Testing code
-# test = Restaurant("Jac", "350b534")
-# test.add_fridge()
-# test.add_fridge()
-# test.show_all_fridges()
-# print("------")
-# test.edit_fridge()
-# test.show_all_fridges()
